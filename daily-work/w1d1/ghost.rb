@@ -11,13 +11,11 @@ class Game
 
   def take_turn
     guess = @current_player.guess
-    if !valid_play?(guess)
+    while !valid_play?(guess)
       @current_player.alert_invalid_guess
-      return false
-    else
-      @fragment << guess
-      return true
+      guess = @current_player.guess
     end
+    @fragment << guess
   end
 
   def valid_play?(string)
@@ -38,26 +36,41 @@ class Game
   def play_round
     game_on = true
     while game_on
-
-      until take_turn
+      take_turn
+      if check_win
+        game_on = false
+      else
+        next_player!
       end
-      game_on = !check_win  
-      next_player!
     end
-
-
+    update_record
+    print_score
   end
 
+  def update_record
+    @current_player.add_loss
+    next_player!
+  end
+
+  def print_score
+    puts "round over"
+    @players.each{ |player| puts "#{player.name}: #{"GHOST"[0...player.losses]}" if player.losses < 5}
+  end
 
 end
 
 
 class Player
 
-  attr_reader :name
+  attr_reader :name, :losses
 
   def initialize(name)
     @name = name
+    @losses = 0
+  end
+
+  def add_loss
+    @losses += 1
   end
 
   def alert_invalid_guess
