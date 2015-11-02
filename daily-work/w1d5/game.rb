@@ -1,4 +1,5 @@
 require_relative "board.rb"
+require 'yaml'
 
 def reload
   load 'game.rb'
@@ -17,14 +18,22 @@ class Game
     until won? || lost?
       board.render
       user_move = prompt_input
+      if user_move == :quit
+        save_game
+        break
+      end
       process_move(user_move)
     end
 
     board.render
-    puts "You win" if won?
-
-    puts "You lose!"
-    reveal_entire_board
+    if won?
+      puts "You win"
+    elsif lost?
+      puts "You lose!"
+      reveal_entire_board
+    else
+      puts "Goodbye"
+    end
   end
 
   def reveal_entire_board
@@ -33,10 +42,18 @@ class Game
   end
 
   def prompt_input
-    puts "Would you like to reveal (r) a tile or flag/unflag (f) a tile?"
+    puts "What would you like to do?"
+    puts "-Enter \"r\" to reveal a tile"
+    puts "-Enter \"f\" to flag a tile"
+    puts "-Enter \"quit\" to save and quit the game"
+
     choice = gets.strip.downcase
+
+    return :quit if choice == "quit"
+
     puts "Where would you like to do so? (x,y)"
     position = gets.strip.split(",")
+
     {move_type: choice, x: position[0].to_i, y: position[1].to_i}
   end
 
@@ -74,6 +91,8 @@ class Game
 
   def welcome_user
     puts "Welcome to Minesweeper"
+    puts "Would you like to load a saved game? (y/n)"
+    load_game if gets.chomp.downcase == "y"
   end
 
   def won?
@@ -87,5 +106,18 @@ class Game
     all_tiles = board.grid.flatten
     all_tiles.any?{|tile| tile.is_bomb? && tile.revealed}
   end
+
+  def save_game
+    save = @board.to_yaml
+    File.open("save.txt", "w") do |f|
+      f.puts save
+    end
+  end
+
+  def load_game
+    loaded_board = File.read("save.txt")
+    @board = YAML::load(loaded_board)
+  end
+
 
 end
