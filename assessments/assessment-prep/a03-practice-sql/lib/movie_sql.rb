@@ -20,6 +20,16 @@ end
 # title.
 def bearded_films
   MovieDatabase.execute(<<-SQL)
+    SELECT
+      movie.title
+    FROM
+      movie
+    JOIN
+      casting ON casting.movieid = movie.id
+    JOIN
+      actor ON casting.actorid = actor.id
+    WHERE
+      actor.name = 'Chuck Norris'
   SQL
 end
 
@@ -27,6 +37,18 @@ end
 # order by the actor's name.
 def zombie_cast
   MovieDatabase.execute(<<-SQL)
+    SELECT
+      actor.name
+    FROM
+      movie
+    JOIN
+      casting ON casting.movieid = movie.id
+    JOIN
+      actor ON casting.actorid = actor.id
+    WHERE
+      movie.title = 'Zombies of the Stratosphere'
+    ORDER BY
+      actor.name
   SQL
 end
 
@@ -35,6 +57,24 @@ end
 # >2 movies. Order by year. Note the 'V' is capitalized.
 def biggest_years_for_little_danny
   MovieDatabase.execute(<<-SQL)
+  SELECT
+    yr, count(movie.id) count
+  FROM
+    movie
+  JOIN
+    casting ON casting.movieid = movie.id
+  JOIN
+    actor ON casting.actorid = actor.id
+  WHERE
+    actor.name = 'Danny DeVito'
+  GROUP BY
+    movie.yr
+  HAVING
+    count(movie.id) > 2
+  ORDER BY
+    movie.yr
+
+
   SQL
 end
 
@@ -42,6 +82,20 @@ end
 # star role. Order by movie title.
 def more_cage_please
   MovieDatabase.execute(<<-SQL)
+    SELECT
+      movie.title
+    FROM
+      movie
+    JOIN
+      casting ON casting.movieid = movie.id
+    JOIN
+      actor ON casting.actorid = actor.id
+    WHERE
+      actor.name = 'Nicolas Cage'
+    AND
+      casting.ord > 1
+    ORDER BY
+      movie.title
   SQL
 end
 
@@ -49,6 +103,20 @@ end
 # films. Order by movie title.
 def who_is_florence_lawrence
   MovieDatabase.execute(<<-SQL)
+  SELECT
+    movie.title, actor.name
+  FROM
+    movie
+  JOIN
+    casting ON casting.movieid = movie.id
+  JOIN
+    actor ON casting.actorid = actor.id
+  WHERE
+    yr = 1908
+  AND
+    ord = 1
+  ORDER BY
+    movie.title
   SQL
 end
 
@@ -57,6 +125,15 @@ end
 # 'num_bad_actors'.
 def count_bad_actors
   MovieDatabase.execute(<<-SQL)
+  SELECT
+    count(actor.id) as num_bad_actors
+  FROM
+    actor
+  LEFT OUTER JOIN
+    casting ON casting.actorid = actor.id
+  WHERE
+    casting.movieid IS NULL
+
 SQL
 end
 
@@ -64,6 +141,18 @@ end
 # starring roles. Order by actor name.
 def twenty_roles
   MovieDatabase.execute(<<-SQL)
+  SELECT
+    actor.name
+  FROM
+    actor
+  JOIN
+    casting ON casting.actorid = actor.id
+  WHERE
+    casting.ord = 1
+  GROUP BY
+    actor.name
+  HAVING
+    count(casting.movieid) = 20
   SQL
 end
 
@@ -71,5 +160,21 @@ end
 # 'Chris Farley' played in.
 def chris_is_missed
   MovieDatabase.execute(<<-SQL)
+  SELECT DISTINCT
+    movie.title, actor.name
+  FROM
+    movie
+  JOIN
+    casting ON casting.movieid = movie.id
+  JOIN
+    actor ON casting.actorid = actor.id
+  JOIN
+    casting cfc ON cfc.movieid = movie.id
+  JOIN
+    actor cf ON cfc.actorid = cf.id
+  WHERE
+    casting.ord = 1
+  AND
+    cf.name = 'Chris Farley'
   SQL
 end
