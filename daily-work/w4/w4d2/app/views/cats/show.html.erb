@@ -1,0 +1,15 @@
+<table>
+  <% [:name, :color, :sex, :birth_date, :description].each do |attribute| %>
+  <tr>
+    <td>
+      <%= "#{attribute.to_s.capitalize}:" %>
+    </td>
+    <td>
+      <%= @cat.send(attribute).to_s.capitalize %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= link_to "Edit Cat", edit_cat_path(@cat) %>
+<%= link_to "Back to Cats", cats_path %>

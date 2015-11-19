@@ -1,0 +1,35 @@
+<label>Name:</label>&nbsp;
+<input type="text" name="cat[name]" value="<%= @cat.name.to_s %>">
+
+<br><br>
+
+<label>Sex:</label>
+<br>
+<input type="radio" name="cat[sex]" value="F" <%="checked" if @cat.sex == "F" %>>
+<label>Female</label>
+<br>
+<input type="radio" name="cat[sex]" value="M" <%="checked" if (@cat.sex == "M") %>>
+<label>Male</label>
+
+<br><br>
+
+<label>Color:</label>&nbsp;
+<select name="cat[color]">
+  <option></option>
+  <% Cat.colors.each do |current_color| %>
+    <option value="<%= current_color %>" <%="selected" if @cat.color == "#{current_color}" %>> <%= current_color.capitalize %> </option>
+  <% end %>
+</select>
+
+<br><br>
+
+<label>Date:</label>&nbsp;
+<input type="date" name="cat[birth_date]" value="<%= @cat.birth_date %>">
+
+<br><br>
+
+<label>Description:</label>
+<br>
+<textarea name="cat[description]" rows="12" cols="40"><%= @cat.description %></textarea>
+
+<br><br>
