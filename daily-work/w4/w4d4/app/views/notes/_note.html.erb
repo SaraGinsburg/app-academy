@@ -1,0 +1,11 @@
+<label>User: <%= note.user.email %></label>
+<br>
+  &nbsp; <%= note.body %>
+<br>
+<label>Posted at <%= note.created_at %></label>
+<% if note.user == current_user %>
+  <br>
+  <%= button_to 'Delete Note', track_note_path(note.track, note), method: :delete %>
+<% end %>
+
+<br><br>

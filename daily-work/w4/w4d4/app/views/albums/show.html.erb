@@ -1,0 +1,15 @@
+<h3><%= @album.title %> </h3>
+Artist: <%= @album.band.name %> <br>
+Recorded: <%= @album.recording_locale.capitalize %> <br><br>
+
+<label>Tracks:</label>
+<ul>
+  <% @album.tracks.each do |track| %>
+    <li> <%= link_to "#{track.title}", track_path(track) %> </li>
+  <% end %>
+</ul><br>
+
+<%= link_to "Edit Album", edit_album_path %> <br>
+<%= link_to "Add a new track to this album", new_album_track_path(@album) %><br>
+<!--%= link_to "Delete Album", delete_album_path %> <br-->
+<%= link_to "Back to #{@album.band.name}", band_path(@album.band_id) %>

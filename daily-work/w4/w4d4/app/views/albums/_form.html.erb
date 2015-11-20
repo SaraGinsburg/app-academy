@@ -1,0 +1,41 @@
+<% method = ((album.persisted?) ? :patch : :post) %>
+<% action = ((album.persisted?) ? album_path(album) : albums_path ) %>
+
+<form action=" <%= action %> " method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+  
+  <label>Enter the Album's Title:</label> <br>
+  <input type="text"
+         name="album[title]"
+         value="<%= @album.title %>"><br><br>
+
+  <label>Select the Band's Name:</label> <br>
+  <select name="album[band_id]">
+    <option></option>
+    <% @bands.each do |band| %>
+      <option value=" <%= band.id %> "
+        <%= album.band_id == band.id ? "selected" : "" %>>
+          <%= band.name %> </option>
+    <% end %>
+  </select> <br><br>
+
+
+  <label>Where was the Album recorded?</label> <br>
+  <input
+    type="radio"
+    name="album[recording_locale]"
+    value="studio"
+    <%= album.recording_locale == "studio" ? "checked" : "" %>>
+  <label>In Studio</label>
+  <input
+    type="radio"
+    name="album[recording_locale]"
+    value="live"
+    <%= album.recording_locale == "live" ? "checked" : "" %>>
+  <label>Live</label>
+  <br><br><br>
+
+  <input type="submit" value= <%= album.id ? "Edit Album!" : "Create Album!"%>>
+
+</form>
