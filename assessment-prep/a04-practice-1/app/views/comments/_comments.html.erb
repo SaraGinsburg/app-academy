@@ -1,0 +1,13 @@
+<h4>Comments</h4>
+<% @link.comments.each do |comment| %>
+  <%= comment.user.username %>
+  <p>
+    <%= comment.body %>
+  </p>
+  <form action="<%= comment_path(comment) %>" method="get">
+    <%= auth_token %>
+    
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Remove Comment">
+  </form>
+<% end %>

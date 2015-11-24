@@ -1,0 +1,28 @@
+<label>
+  Title: <%= @link.title %>
+</label>
+
+<br>
+
+<label>
+  URL:  <a href="<%= @link.url %>"><%= @link.url %></a>
+</label>
+
+<br>
+
+<%= link_to "Edit Link", edit_link_path(@link) %>
+
+<br>
+
+<%= link_to "Links", links_path %>
+
+
+<br>
+
+<h3>Comments</h3>
+<%= render partial: "comments/comments" %>
+
+<br>
+
+<h4>Add Comment</h4>
+<%= render partial: "comments/form" %>

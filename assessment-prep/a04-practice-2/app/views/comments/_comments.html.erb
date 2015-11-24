@@ -1,0 +1,4 @@
+<% @comments.each do |comment| %>
+  <%= comment.user.username %> posted: <%= comment.body %>
+  <%= button_to "Remove Comment", comment_path(comment), method: :delete %>
+<% end %>

@@ -1,0 +1,26 @@
+<h2>Sign In</h2>
+
+<%= error_messages(@user) %>
+
+<form action="<%= session_path %>" method="post">
+  <%= auth_token %>
+
+  <label for="username">Username:</label>
+  <input type="text"
+    name="user[username]"
+    value="<%= @user.username %>"
+    id="username">
+
+  <br>
+
+  <label for="password">Password:</label>
+  <input type="password"
+    name="user[password]"
+    value=""
+    id="password">
+
+  <br>
+
+  <input type="submit" name="Sign Up" value="Sign In">
+
+</form>

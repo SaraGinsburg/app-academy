@@ -1,0 +1,6 @@
+<h1>Edit Link</h1>
+<form action="<%= link_path(@link) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= render partial: "form" %>
+  <input type="submit" value="Update Link">
+</form>

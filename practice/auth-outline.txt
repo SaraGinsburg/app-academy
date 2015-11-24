@@ -1,0 +1,154 @@
+
+___________AUTH FINAL OUTLINE___________
+
+
+_____USER_____
+#password
+#is_password?(password)
+#reset_session_token!
+#ensure_session_token
+::generate_session_token
+::find_by_credentials
+
+validates :username, :password_digest, :session_token, presence: true
+validates :password, length: { minimum: 6, allow_nil: true}
+attr_reader
+after_initialize :ensure_session_token
+
+NOTES:
+-gen with “rails g model User username:string password_digest:string session_token:string”
+
+
+_____USERS CONTROLLER_____
+#new
+#create
+#user_params
+
+NOTES:
+-remember to flash errors to get validation feedback
+-#login on create
+
+
+_____SESSIONS CONTROLLER_____
+#new
+#create
+#destroy
+#user_params
+
+NOTES:
+-remember to flash errors to get validation feedback
+-#login/#logout methods on create/destroy
+-redirect to homepage (whatever that is) on create
+-redirect to login on destroy
+
+
+_____APPLICATION CONTROLLER_____
+#current_user		(User.find_by(session_token: session[:session_token]))
+#login(user)		(session[:session_token] = user.reset_sesion_token!)
+#logout 		(session[:session_token] = nil)
+#logged_in? 		(!!current_user)
+#ensure_login 		(redirect_to new_session_path unless logged_in?)
+
+helper_method :current_user, :login, :logout, :logged_in?, :ensure_login
+
+NOTES:
+-all methods are one-liners
+-all methods are helper_methods
+
+
+_____APPLICATION HELPER_____
+#auth_token 		(include in all forms)
+#session_button		(include on all pages, shouldn’t show up at login/signup)
+#flash_errors		(include on all pages, shouldn’t up after good forms)
+
+NOTES:
+-all methods return some kind of HTML, ERB or Rails HTML generator method
+-make sure all returned strings are .html_safe 
+
+
+
+_____VIEWS_____
+/layouts/application
+	add #session_button and #flash_errors (from application helper) above 	yield in body (nothing else needed)
+
+/users/new
+	<h1>Sign Up</h1>
+	<form action="<%= users_path %>" method="post">
+	  <%= render partial: "shared/user_form" %>
+	  <input type="submit" value="Sign Up">
+	</form>
+(include page title, form posting to users_path, render partial _user_form)
+
+/sessions/new
+	<h1>Sign In</h1>
+	<form action="<%= session_path %>" method="post">
+	  <%= render partial: "shared/user_form" %>
+	  <input type="submit" value="Sign In">
+	</form>
+(include page title, form posting to users_path, render partial _user_form)
+	
+/shared/_user_form
+-two inputs: “username” and “password”
+-nest inputs in <label></label>
+-include auth_token
+
+
+
+
+
+
+
+================================================================================
+
+AUTH OUTLINE- This is what’s needed to implement authentication model
+
+User Model
+-iVars: 
+:username
+:password_digest
+:session_token
+
+-Methods:
+#reset_session_token!
+#password=(password)
+#is_password
+::find_by_credentials(username, password)
+::generate_session_token
+
+-Validations:
+presence: password_digest, session_token, username
+length: username (minimum, allow_nil)
+
+-after_initialize:
+#ensure_session_token
+
+
+Users Controller
+#new (sign up page)
+#create (sign up action)
+#user_params 
+#show (optional: profile page)
+#edit (optional: edit profile page)
+#update (optional: edit profile action)
+#destroy (optional: delete user action)
+
+
+Sessions Controller
+#new (sign in page)
+#create (sign in action)
+#destroy (sign out action)
+#user_params
+
+
+Helper/Controller methods (all controller methods are helper_method’s)
+#current_user
+#log_in!
+#log_out!
+#logged_in?
+#auth_token
+
+
+Views
+/users/new
+/users/:id/show (optional: profile page)
+/sessions/new

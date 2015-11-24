@@ -1,0 +1,30 @@
+<% action = @link.persisted? ? link_path(@link) : links_path %>
+<% method = @link.persisted? ? "patch" : "post" %>
+<% submit_string = @link.persisted? ? "Update Link" : "Create New Link" %>
+
+<%= error_messages(@link) %>
+
+<form class="" action="<%= action %>" method="post">
+  <input type="hidden" name="_method" value="<%= method %>">
+  <%= auth_token %>
+
+  <label for="title">Title</label> <br>
+  <input type="text"
+    name="link[title]"
+    value="<%= @link.title %>"
+    id="title">
+
+  <br>
+
+  <label for="text">URL</label> <br>
+  <input type="url"
+    name="link[url]"
+    value="<%= @link.url %>"
+    id="URL">
+
+  <br><br>
+
+  <input type="submit"
+    name="<%= submit_string %>"
+    value="<%= submit_string %>">
+</form>

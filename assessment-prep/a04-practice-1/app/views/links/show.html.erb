@@ -1,0 +1,18 @@
+<%= @link.title %>
+
+<br>
+
+<%= @link.url %>
+
+<br>
+
+<%= render partial: "comments/comments", link: @link %>
+
+<br>
+
+<%= render partial: "comments/form", link: @link %>
+
+<br>
+
+<%= link_to "Edit Link", edit_link_path(@link) %>
+<%= link_to "Links", links_path %>
