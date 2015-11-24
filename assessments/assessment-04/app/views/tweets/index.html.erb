@@ -1,0 +1,15 @@
+<h1>Tweets</h1>
+
+<ul>
+  <% @my_tweets.each do |tweet| %>
+    <li>
+      <a href="<%= tweet_path(tweet) %>"><%= tweet.title %></a>
+    </li>
+  <% end %>
+</ul>
+
+<!-- <form class="" action="<%# new_tweet_path %>" method="post">
+  <input type="submit" value="Create">
+</form> -->
+
+<%= button_to "Create New Tweet", new_tweet_path, method: :get, id: "Create New Tweet" %>

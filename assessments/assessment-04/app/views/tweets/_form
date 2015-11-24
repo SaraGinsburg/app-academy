@@ -1,0 +1,12 @@
+<%= auth_token %>
+<input type="hidden" name="tweet[user_id]" value="<%= current_user.id %>">
+
+<label>
+Title:
+<input type="text" name="tweet[title]" value="<%= @tweet.title %>">
+</label>
+
+<label>
+Body:
+<input type="text" name="tweet[body]" value="<%= @tweet.body %>">
+</label>

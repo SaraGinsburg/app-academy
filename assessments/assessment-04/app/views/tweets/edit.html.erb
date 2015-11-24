@@ -1,0 +1,7 @@
+<h1>Edit Tweet</h1>
+
+<form class="" action="<%= tweet_path(@tweet) %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <%= render partial: "form" %>
+  <input type="submit" value="Update Tweet">
+</form>

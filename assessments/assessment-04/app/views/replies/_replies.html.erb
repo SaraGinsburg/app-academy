@@ -1,0 +1,8 @@
+<ul>
+  <% @tweet.replies.each do |reply| %>
+      <li>
+        <%= reply.body %>
+        <%= button_to "Remove Reply", reply_path, method: :delete %>
+      </li>
+  <% end %>
+</ul>

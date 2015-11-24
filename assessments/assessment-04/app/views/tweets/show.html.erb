@@ -1,0 +1,15 @@
+<h3><%= @tweet.title %></h3>
+<span>By: <%= @tweet.user.username %></span>
+<p>
+  <%= @tweet.body %>
+</p>
+
+<%= link_to "Edit Tweet", edit_tweet_path(@tweet) %>
+
+<h4>Replies</h4>
+
+<%= render partial: "replies/replies" %>
+
+<h4>Add Reply</h4>
+
+<%= render partial: "replies/form" %>

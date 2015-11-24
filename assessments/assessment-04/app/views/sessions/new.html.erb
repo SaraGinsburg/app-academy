@@ -1,0 +1,7 @@
+<h1>Sign In</h1>
+
+<form class="" action="<%= session_path %>" method="post">
+  <%= auth_token %>
+  <%= render partial: "shared/user_form" %>
+  <input type="submit" value="Sign In">
+</form>

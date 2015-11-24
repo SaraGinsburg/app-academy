@@ -1,0 +1,9 @@
+<form class="" action="<%= replies_path %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="reply[tweet_id]" value="<%= @tweet.id %>">
+  <label>
+    Reply Body:
+    <input type="text" name="reply[body]">
+  </label>
+  <input type="submit" name="name" value="Add Reply">
+</form>
