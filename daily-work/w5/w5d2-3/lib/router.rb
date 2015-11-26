@@ -57,8 +57,8 @@ class Router
 
   # should return the route that matches this request
   def match(req)
-    routes = @routes.select { |route| route.matches?(req) }
-    routes.empty? ? nil : routes.first
+    @routes.find { |route| route.matches?(req) }
+    # routes.empty? ? nil : routes.first
   end
 
   # either throw 404 or call run on a matched route
@@ -68,6 +68,8 @@ class Router
       route.run(req, res)
     else
       res.status = 404
+      res.body = ["cannot find #{req.path}"]
+      raise "404 can't find path"
     end
   end
 end

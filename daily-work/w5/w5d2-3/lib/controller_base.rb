@@ -4,6 +4,7 @@ require 'erb'
 require 'byebug'
 require 'active_support/inflector'
 require_relative './session'
+require_relative './flash'
 
 class ControllerBase
   attr_reader :req, :res, :params
@@ -13,11 +14,12 @@ class ControllerBase
     @req = req
     @res = res
     @params = route_params.merge(@req.params)
+    @already_built_response = false
   end
 
   # Helper method to alias @already_built_response
   def already_built_response?
-    @already_built_response ||= false
+    @already_built_response
   end
 
   # Set the response status code and header
@@ -29,6 +31,7 @@ class ControllerBase
 
     @already_built_response = true
     session.store_session(@res)
+    flash.store_flash(@res)
   end
 
   # Populate the response with content.
@@ -43,15 +46,16 @@ class ControllerBase
 
     @already_built_response = true
     session.store_session(@res)
+    flash.store_flash(@res)
   end
 
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
-    ensure_new_response
+    # ensure_new_response
     controller_name = self.class.to_s.underscore
 
-    file_name = "views/#{controller_name}/#{template_name.to_s.underscore}.html.erb"
+    file_name = "../views/#{controller_name}/#{template_name.to_s.underscore}.html.erb"
     f = File.read(file_name)
 
     content = ERB.new(f).result(binding)
@@ -65,10 +69,14 @@ class ControllerBase
     @session ||= Session.new(@req)
   end
 
+  def flash
+    @flash ||= Flash.new(@req)
+  end
+
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
     self.send(name)
-    render(name)
+    render(name) unless already_built_response?
   end
 
   def ensure_new_response
