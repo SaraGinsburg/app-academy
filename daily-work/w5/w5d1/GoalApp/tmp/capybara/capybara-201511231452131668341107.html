@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GoalApp</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+  <script src="/assets/application.js" data-turbolinks-track="true"></script>
+  
+</head>
+<body>
+
+        jeff
+        <form class="button_to" method="post" action="http://www.example.com/session"><input type="hidden" name="_method" value="delete" /><input type="submit" value="Logout" /></form>
+
+
+
+<h2>Set Goal</h2>
+
+
+
+<form action="/goals" method="post">
+        <input type="hidden"
+        name="authenticity_token"
+        value="YfBWpMMhG87zyE+vple1ujZRcY4W1Xp3WVm520O8evpFvZ1VWraeCUa+GdRybpu6/VzVYY8NmwbD1HnnJvUqcg==">
+
+
+  <input type="hidden" name="_method" value="post">
+
+  <label>
+    Goal:
+    <input type="text"
+    name="goal[body]"
+    value=""
+    id="body">
+  </label>
+
+  <br><br>
+
+  <label>
+    Privacy
+
+    <br>
+
+    <input type="radio"
+      name="goal[public]"
+      value="true"
+      id="public"
+      checked> Public
+
+    <br>
+
+    <input type="radio"
+      name="goal[public]"
+      id="private"
+      value="false"> Private
+  </label>
+
+  <br><br>
+
+  <input type="submit" value="Set Goal">
+
+</form>
+
+
+
+</body>
+</html>

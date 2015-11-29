@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GoalApp</title>
+  <link rel="stylesheet" media="all" href="/assets/application.css" data-turbolinks-track="true" />
+  <script src="/assets/application.js" data-turbolinks-track="true"></script>
+  
+</head>
+<body>
+
+        <a href="http://www.example.com/session/new">Sign In</a> or
+        <a href="http://www.example.com/users/new">Sign Up</a>
+
+
+
+<h2>MyString</h2>
+
+<label>
+  Status: In Progress
+</label>
+
+<h3>Comments</h3>
+  <p>
+    <b><a href="/users/1">testun</a></b> posted: MyString
+  </p>
+
+
+<h3>Leave a comment</h3>
+<form action="/goal_comments" method="post">
+        <input type="hidden"
+        name="authenticity_token"
+        value="V1G7DX4yyZ8qaiR1JjGsjxlizb3D2vQ0Ui8TlrLDk1yQlD/YUtpXWAY/AM1KwLhquVR1Cz4Gf7ESTcRfigVmGg==">
+
+  <input type="text"
+    name="goal_comment[body]"
+    value=""
+    id="comment_body">
+  <input type="hidden" name="goal_comment[goal_id]" value="1">
+  <input type="submit" value="Post Comment">
+</form>
+
+
+
+</body>
+</html>
