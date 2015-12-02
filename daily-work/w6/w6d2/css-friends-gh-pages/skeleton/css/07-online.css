@@ -1,0 +1,14 @@
+/* PHASE 7: Online */
+.online-tag {
+  color: white;
+  background-color: #0c0;
+  box-shadow: 1px 1px 1px black;
+  padding: 3px 20px;
+  font-weight: 300;
+  font: 12px;
+  position: absolute;
+  margin-left: -25px;
+  top: 15px;
+  transform: rotate(-45deg);
+  background-clip: content-box;
+}

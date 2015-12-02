@@ -1,0 +1,57 @@
+/* PHASE 1: Header */
+body {
+  font-size: 16px;
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+  background: #eee;
+}
+
+header {
+  background: #f00;
+  height: 39px;
+}
+
+.header-list {
+  color: white;
+}
+
+.nav-item {
+  float:left;
+  padding: 11px 15px 10px 15px;
+  border-right: 1px solid white;
+  margin: 0px;
+}
+
+.nav-item:first-of-type {
+  border-left: 1px solid white;
+}
+
+li.nav-item {
+  padding-left: 19px;
+  padding-right: 19px;
+}
+
+.nav-item:hover {
+  background: #000;
+}
+
+nav {
+  width: 900px;
+  left: auto;
+  right: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1.header-list {
+  float: left;
+  display: block;
+
+  left: 100px;
+  /*right: 50px;*/
+}
+
+ul.header-list {
+  float: right;
+  font-weight: normal;
+}

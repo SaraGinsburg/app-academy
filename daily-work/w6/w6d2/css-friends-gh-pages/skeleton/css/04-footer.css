@@ -1,0 +1,39 @@
+/* PHASE 4: Footer */
+.footer{
+  width: 900px;
+  left: auto;
+  right: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: white;
+  border-left: 1px solid lightgrey;
+  border-right:1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 56px;
+  color: #aaa;
+  font-weight: lighter;
+}
+
+ul.footer-list {
+  float: right;
+}
+
+li.footer-item, h1.footer-list{
+  float:left;
+  padding: 21px 10px;
+  font-size: 14px;
+}
+
+h1.footer-list{
+  padding-left: 25px;
+}
+
+li.footer-item:hover{
+  color: black;
+}
+
+li.footer-item:last-of-type {
+  padding-right: 20px
+}
