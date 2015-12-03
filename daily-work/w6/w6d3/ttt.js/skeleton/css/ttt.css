@@ -1,0 +1,35 @@
+
+.board-list {
+  width: 600px;
+  height: 600px;
+  background: lightgray;
+  list-style-type: none;
+  position: relative;
+  padding: 0px;
+}
+
+.square {
+  float: left;
+  /*position: absolute;*/
+  display: block;
+  width: 200px;
+  height: 200px;
+  outline: 1px solid #000;
+}
+
+.marked {
+  background: white;
+  font-family: 'Caveat Brush', cursive;
+  font-size: 180px;
+  text-align: center;
+}
+
+.square:hover {
+  background: yellow;
+}
+
+.board_list:after {
+  content: ""; /* Empty content string */
+  display: block; /* Only block elements can clear */
+  clear: both;
+}
