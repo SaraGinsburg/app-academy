@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.14.2.js"></script>
+    <script src="https://fb.me/react-dom-0.14.2.js"></script>
+    <title>jsx demo</title>
+  </head>
+  <body>
+    <script>
+      ReactDOM.render(
+          <div className="true-statements">I love JavaScript!</div>,
+          document.body
+      );
+
+      ReactDOM.render(
+        React.createElement(
+          'div',
+          { className: 'true-statements' },
+          'I love JavaScript'
+        ),
+        document.body
+      );
+    </script>
+  </body>
+</html>
