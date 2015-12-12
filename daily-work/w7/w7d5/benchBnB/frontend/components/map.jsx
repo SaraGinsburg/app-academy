@@ -6,6 +6,9 @@ var React = require('react'),
 var Map = React.createClass({
   componentDidMount: function(){
     this._initializeMap()
+    google.maps.event.addListener(this.map, 'idle', function () {
+      ApiUtil.fetchBenches();
+    });
     this.listenerToken = BenchStore.addListener(this._onChange);
   },
 
@@ -13,13 +16,12 @@ var Map = React.createClass({
     var benches = BenchStore.all();
     benches.forEach(function (bench) {
       var pos = {lat: bench.lat, lng: bench.lng};
-      console.log(pos);
       var marker = new google.maps.Marker({
         position: pos,
         map: this.map,
         title: bench.description
         });
-    });
+    }.bind(this));
   },
 
   _initializeMap: function () {
