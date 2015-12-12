@@ -24,4 +24,5 @@ var fetchPokemon = function(pokemonId) {
 
 module.exports = {
   fetchAllPokemons: fetchAllPokemons,
-  fetchPokemon: fetchPokemon};
+  fetchPokemon: fetchPokemon
+};
