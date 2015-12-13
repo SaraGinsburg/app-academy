@@ -20,6 +20,7 @@ BenchStore.__onDispatch = function (payload) {
 
 var resetBenches = function (newBenches) {
   _benches = newBenches;
+  console.log(_benches.length);
   BenchStore.__emitChange();
 }
 

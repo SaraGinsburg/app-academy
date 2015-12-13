@@ -1,0 +1,48 @@
+I've made some changes based on my feedback the attached folder (saves time).  I'd recommend working off of it.
+
+Feedback:
+
+- Add README
+  - Add instruction to npm install:
+    - Either: include node_modules in the project when you zip it so people don't have to download.
+    - Or: Give extra time to npm install (if everyone is downloading, internet will be slow).
+
+  - Then npm test
+  - Add path to test files (__tests__) in README so students can find them easily.  In each folder.
+  - Add recommended order of tests
+
+- npm install threw a dependency error for me because react-router requires a history 1.13.x version.  I changed the ^1.13.0 to a ~1.13.0 (so when we run npm install, history will update to 1.13.9, for example, but not 1.14.0).
+
+- npm test fails on first run: see route_error.png
+  - I added <Router></Router> inside render to start them off.
+
+- Took me a long time to understand what the tests were doing.  We'll need a good explanation in the README or something.
+
+- Added a basic render method to the PostIndex, PostShow, and PostEdit components.  The first test (involving the App Component) failed because the PostIndex, PostShow and PostEdit components don't have render methods.  It was an unclear error and hard to track down.
+
+- Not easy to test without an index.html page (can only console.log inside tests).  I included one so students can test their code more easily.
+  - Add instructions to set this up in the README
+
+- Added sourcemaps to webpack so errors from index.html are clearer
+
+- I don't have enough experience in react routing (as of morning w7d4) to be able to do write the router on the fly.  I had to look up the docs.  Students might have this ingrained by the time they take the assessment.
+
+- I'm in favor of allowing students to google for this assessment in case weird bugs pop up.
+
+- There's enough moving parts, hard to read errors, and edge cases (which is natural, especially when testing frontend) that I'd want multiple other TAs to test this before we make this an official assessment that counts.
+  - At the very least, have the docs available.
+
+- For 'lists the title of each post in a list index component'
+  - Confusing that we initially set the state with the posts, instead of updating the store.
+
+- There's a TODO at the bottom of postShow-test that I'm removing and putting as an Asana task
+
+- Requiring apiUtil under the postActions definition is really tricky.  We should give a lot of guidance there.
+
+- I was able to hack around quite a few tests: for example, I was able to get away without listening to PostStore in the PostShow view for some reason.
+
+- Should we be listening to the PostStore in postShow?
+
+- I think it's too much for students reading the test to realize that the callback to addListener in postIndex is supposed to receive posts as an argument: they could also just set state to PostStore.all() there.  Maybe allow for both options?
+
+- Haven't fully gotten to test out my new tests with your solutions.  I was having some issues with PostStore which we should look into.

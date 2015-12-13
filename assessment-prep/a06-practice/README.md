@@ -1,46 +1,57 @@
-# Backbone Assessment
+# React Assessment
 
-This assessment depends on `capybara-webkit` to run integration specs.
-One of the dependencies of this gem is Qt, which you may need to install
-separately.
+## Instructions
 
-via Homebrew:
-```sh
-$ brew update
-$ brew install qt
+## Setup
+
+If anything here fails, call over a TA to help.
+
+1. `npm install`
+2. `bundle install`
+3. `rake db:create`
+4. `rake db:migrate`
+5. `rails server`
+6. In a new terminal tab, `webpack --watch`
+
+Test your code live at localhost:3000.
+
+## Running specs
+
+Run specs with `npm test`.
+
+To run the spec file you want, remove the "x" in the "xdescribe" at the top of that file.  For example, in `frontend/__tests__/router-test.js`:
+
+```javascript
+
+xdescribe('router', function () {
+    // ...
+
+```
+turns into
+
+```javascript
+
+describe('router', function () {
+    // ...
+
 ```
 
-via Macports:
-```sh
-$ sudo port selfupdate
-$ sudo port install qt4-mac
-```
+Then run `npm test`.
 
-Refer to the following link if you have trouble installing:
-https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+We recommend passing your specs in this order:
 
-Lets take **1 hour**. There are two sets of specs to run, Jasmine specs
-and Capybara (integration) specs.
+1. `frontend/__tests__/reactA06-test.js`
+2. `frontend/stores/__tests__/postStore-test.js`
+3. `frontend/components/__tests__/postIndexItem-test.js`
+4. `frontend/components/__tests__/postForm-test.js`
+5. `frontend/components/__tests__/postEdit-test.js`
+5. `frontend/components/__tests__/postShow-test.js`
 
-First run the Jasmine specs by running `rake jasmine` and browse to
-`localhost:8888`.
 
-Running the integration specs requires the test database to be migrated.
-Run `rake db:test:load` to get the database setup.
+## Debugging tips
 
-Then to run the integration specs, run `rspec spec/features/integration_spec.rb`.
+1. Look at the test file to see how we expect the method to behave.  The errors you see in terminal are not often helpful
 
-Jasmine doesn't behave well with JST so the templates are written inline
-for you.  `_.template("<%= obj.method() %>")` will create a template
-function similar to how JST["posts/form"] does. Try not to let this trip
-you up.
+2. The bottom most line of the stacktrace gives you the best guess for where your error is.
 
-Keep in mind that the order of routes matters.
-
-cats/:id
-cats/new //=> this route will never fire, as it will match the cats/:id first.
-
-all of the specs are under `spec/javascripts`
-
-Take a look at routes.rb and you'll notice that posts are available from
-`/api/posts`
+3. You can add console.logs inside of the test files themselves to poke around if you want.
