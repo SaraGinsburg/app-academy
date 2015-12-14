@@ -13,9 +13,9 @@ module.exports = React.createClass({
   render: function() {
     return (
       <ul>
-        // Code goes here. Don't remove the ul.
+      
       </ul>
-    )
+    );
   }
 
 });

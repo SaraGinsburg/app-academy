@@ -4,7 +4,7 @@ var ReactDOM = require('react-dom');
 var TestUtils = require('react-addons-test-utils');
 var expect = require('expect');
 
-xdescribe('post store', function () {
+describe('post store', function () {
   var PostStore;
   var PostActions;
 

@@ -4,11 +4,8 @@ var PostActions = require('../actions/postActions.js');
 
 module.exports = React.createClass({
   render: function() {
-
     return (
-      <li>
-        // Code goes here. Don't remove the <li>.
-      </li>
-    )
+      <li></li>
+    );
   }
 });
