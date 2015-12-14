@@ -1,6 +1,5 @@
 var React = require('react'),
     BenchStore = require('../stores/bench'),
-    ApiUtil = require ('../util/apiUtil'),
     Map = require('./map.jsx');
 
 var Index = React.createClass({
@@ -13,7 +12,7 @@ var Index = React.createClass({
   },
 
   componentWillUnmount: function () {
-    BenchStore.remove(this.listenerToken);
+    this.listenerToken.remove();
   },
 
   _onChange: function () {

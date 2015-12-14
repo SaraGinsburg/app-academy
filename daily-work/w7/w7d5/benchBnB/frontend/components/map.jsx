@@ -37,17 +37,17 @@ var Map = React.createClass({
   },
 
   componentWillUnmount: function () {
-    BenchStore.remove(this.ListenerToken);
+    this.listenerToken.remove();
     google.maps.event.removeListener(this.mapListenerToken)
   },
 
   clearMarkers: function () {
     console.log("old: " + this.state.markers.length);
     this.state.markers.forEach(function (marker) {
-      if (!this.map.getBounds().contains(marker.position)) {
+      // if (!this.map.getBounds().contains(marker.position)) {
         marker.setMap(null);
         marker = null
-      }
+      // }
     }.bind(this));
   },
 

@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211194736) do
+ActiveRecord::Schema.define(version: 20151214181927) do
 
   create_table "benches", force: :cascade do |t|
     t.string   "description"
     t.float    "lat"
     t.float    "lng"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "seating",     default: 1, null: false
   end
 
   add_index "benches", ["lat"], name: "index_benches_on_lat"

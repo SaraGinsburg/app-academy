@@ -2,7 +2,8 @@ var React = require('react'),
     BenchStore = require('../stores/bench'),
     ApiUtil = require ('../util/apiUtil'),
     Map = require('./map.jsx'),
-    Index = require('./index.jsx');
+    Index = require('./index.jsx'),
+    BenchForm = require('./benchForm.jsx');
 
 var Search = React.createClass({
   render: function () {
