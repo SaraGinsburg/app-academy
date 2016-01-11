@@ -1,10 +1,11 @@
 var React = require('react'),
     BenchStore = require('../stores/bench'),
-    Map = require('./map.jsx');
+    Map = require('./map.jsx'),
+    FilterParamsStore = require('../stores/filterParams');
 
 var Index = React.createClass({
   getInitialState: function () {
-    return { benches: BenchStore.all() };
+    return { benches: FilterParamsStore.filterBenches() };
   },
 
   componentDidMount: function () {
@@ -17,7 +18,7 @@ var Index = React.createClass({
 
   _onChange: function () {
     this.setState({
-      benches: BenchStore.all()
+      benches: FilterParamsStore.filterBenches()
     });
   },
 

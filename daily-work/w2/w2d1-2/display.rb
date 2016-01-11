@@ -21,7 +21,7 @@ class Display
 
   def render
     system("clear")
-    puts "\#   0   1   2   3   4   5   6   7 "
+    puts "\#  0   1   2   3   4   5   6   7 "
     @board.grid.each_with_index do |row, row_index|
       print "#{row_index} "
       row.each_with_index do |square, col_index|
@@ -30,7 +30,7 @@ class Display
       puts
     end
     unless board.checkmate?
-      puts "\nArrow keys, WASD, or vim to move, space or enter to confirm."
+      puts "\nUse the arrow keys, WASD, or vim to move, space or enter to confirm."
       print "Check! " if self.board.in_check?(board.opposing_player)
       print "It's #{board.current_player.to_s.capitalize}'s turn. \n"
     end
@@ -108,7 +108,7 @@ class Display
   def handle_error(e)
     puts
     puts e.message
-    puts "Make a better play you fool. (Press <enter> if you dare continue...)"
+    puts "Please try again. (Press <enter> if to continue...)"
     gets.chomp
   end
 

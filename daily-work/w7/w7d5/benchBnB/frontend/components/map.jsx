@@ -1,9 +1,12 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     BenchStore = require('../stores/bench'),
-    ApiUtil = require ('../util/apiUtil');
+    FilterParamsStore = require('../stores/filterParams'),
+    ApiUtil = require ('../util/apiUtil'),
+    FilterParamsUtil = require('../util/filterParamsUtil');
 
 var Map = React.createClass({
+
   getInitialState: function () {
       return {markers: []};
   },
@@ -11,15 +14,28 @@ var Map = React.createClass({
   componentDidMount: function(){
     this._initializeMap()
 
-    this.mapListenerToken = google.maps.event.addListener(
+    this.idleListenerToken = google.maps.event.addListener(
       this.map,
       'idle',
       function () {
-        ApiUtil.fetchBenches(this.generateMapBoundaries());
+        var newBounds = this.generateMapBoundaries();
+
+        //is there a way to refactor into one fxn
+        ApiUtil.fetchBenches(newBounds);
+        FilterParamsUtil.changeBounds(newBounds);
       }.bind(this)
     );
 
-    this.listenerToken = BenchStore.addListener(this._onChange);
+    this.clickListenerToken = google.maps.event.addListener(
+      this.map,
+      'click',
+      function (e) {
+        this.props.clickHandler(e.latLng);
+      }.bind(this)
+    );
+
+    this.benchListenerToken = BenchStore.addListener(this._onChange);
+    this.filterListenerToken = FilterParamsStore.addListener(this._onChange);
   },
 
   generateMapBoundaries: function () {
@@ -37,8 +53,8 @@ var Map = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.listenerToken.remove();
-    google.maps.event.removeListener(this.mapListenerToken)
+    this.benchListenerToken.remove();
+    google.maps.event.removeListener(this.idleListenerToken)
   },
 
   clearMarkers: function () {
@@ -53,8 +69,9 @@ var Map = React.createClass({
 
   _onChange: function () {
     this.clearMarkers();
-    var benches = BenchStore.all();
-    this.setState({markers:
+    var benches = FilterParamsStore.filterBenches();
+
+    this.setState({ markers:
       benches.map(function (bench) {
         var pos = {lat: bench.lat, lng: bench.lng};
         return new google.maps.Marker({

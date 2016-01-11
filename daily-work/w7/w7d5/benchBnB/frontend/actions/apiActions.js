@@ -7,6 +7,12 @@ var ApiActions = {
       actionType: BenchConstants.BENCHES_RECEIVED,
       benches: data
     });
+  },
+  createBench: function (data) {
+    Dispatcher.dispatch({
+      actionType: BenchConstants.BENCH_CREATED,
+      bench: data
+    });
   }
 };
 
